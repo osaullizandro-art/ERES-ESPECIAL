@@ -3,88 +3,57 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Acceso Restringido</title>
+<title>Acceso Confidencial</title>
 
 <style>
-*{
-    margin:0;
-    padding:0;
-    box-sizing:border-box;
-}
-
 body{
-    background:#000;
-    color:#00ff88;
-    font-family:Consolas, monospace;
-    overflow:hidden;
+margin:0;
+background:#000;
+color:#00ff88;
+font-family:Consolas,monospace;
+display:flex;
+justify-content:center;
+align-items:center;
+height:100vh;
+overflow:hidden;
 }
 
 #terminal{
-    padding:25px;
-    font-size:18px;
-    white-space:pre-wrap;
+width:90%;
+max-width:800px;
+background:#111;
+padding:25px;
+border-radius:12px;
+box-shadow:0 0 20px #00ff88;
+white-space:pre-wrap;
+line-height:1.6;
 }
 
-.cursor{
-    display:inline-block;
-    width:10px;
-    background:#00ff88;
-    animation:blink .8s infinite;
-}
-
-@keyframes blink{
-50%{opacity:0;}
-}
-
-#boton{
-    display:none;
-    margin-top:30px;
-    padding:15px 30px;
-    font-size:18px;
-    background:#00ff88;
-    color:#000;
-    border:none;
-    border-radius:10px;
-    cursor:pointer;
-    font-weight:bold;
-    transition:.3s;
-}
-
-#boton:hover{
-transform:scale(1.05);
+button{
+display:none;
+margin-top:20px;
+padding:15px 30px;
+background:#00ff88;
+border:none;
+border-radius:8px;
+font-size:18px;
+font-weight:bold;
+cursor:pointer;
 }
 
 #mensaje{
 display:none;
-margin-top:30px;
+margin-top:20px;
+background:#1b1b1b;
 padding:20px;
-background:#111;
-border:2px solid #00ff88;
-border-radius:15px;
-font-size:20px;
-line-height:1.7;
+border-radius:10px;
 color:white;
-animation:fade 1s;
+animation:fade .8s;
 }
 
 @keyframes fade{
 from{opacity:0;transform:translateY(20px);}
 to{opacity:1;transform:translateY(0);}
-}
-
-.confeti{
-position:fixed;
-width:10px;
-height:10px;
-top:-10px;
-animation:caer linear forwards;
-}
-
-@keyframes caer{
-to{
-transform:translateY(110vh) rotate(720deg);
-opacity:0;
-}
 }
 </style>
 
@@ -94,91 +63,100 @@ opacity:0;
 
 <div id="terminal"></div>
 
-<button id="boton" onclick="mostrarMensaje()">
-Ejecutar archivo secreto ❤️
-</button>
-
-<div id="mensaje">
-<h2>❤️ Compilación completada</h2><br>
-
-No encontré ningún error.<br><br>
-
-Resultado del análisis:<br><br>
-
-✔ Inteligente<br>
-✔ Admirable<br>
-✔ Talentosa<br>
-✔ Increíble persona<br><br>
-
-Después de ejecutar miles de líneas de código...
-
-<strong>solo encontré una conclusión:</strong><br><br>
-
-🌹 <b>Eres una de las personas más especiales que he conocido.</b><br><br>
-
-Tu forma de pensar, tu dedicación y la pasión con la que haces lo que te gusta hacen que seas única.
-
-Gracias por existir. ❤️
-
-<br><br>
-
-<small>return "Te admiro muchísimo";</small>
-
-</div>
-
 <script>
 
-const texto=[
-"> Iniciando sistema...",
+const lineas=[
+"OGANDO SYSTEMS v1.0",
+"",
+"> Inicializando sistema...",
+"> Cargando módulos...",
+"",
+"[████████████████████] 100%",
+"",
 "> Conectando...",
-"> Verificando inteligencia...",
-"> Buscando persona extraordinaria...",
+"✔ Conexión establecida",
 "",
-"██████████████████ 100%",
+"> Buscando personas extraordinarias...",
 "",
-"> Resultado encontrado.",
+"✔ Persona encontrada",
 "",
-"> Nombre: ************",
-"> Estado:",
-"   ✔ Inteligente",
-"   ✔ Hermosa",
-"   ✔ Admirable",
-"   ✔ Especial",
+"Nombre: Josefina Aquino ❤️",
 "",
-"> Acceso concedido.",
+"> Analizando...",
 "",
-"> Archivo secreto listo..."
+"✔ Inteligencia .......... 100%",
+"✔ Bondad ................. 100%",
+"✔ Dedicación ............. 100%",
+"✔ Paciencia .............. 100%",
+"✔ Carisma ............... 100%",
+"",
+"> Generando informe...",
+"",
+"✔ Informe listo."
 ];
 
-let linea=0;
-let caracter=0;
-
-const terminal=document.getElementById("terminal");
+let i=0;
 
 function escribir(){
 
-if(linea<texto.length){
+if(i<lineas.length){
 
-if(caracter<texto[linea].length){
+document.getElementById("terminal").innerHTML+=lineas[i]+"<br>";
 
-terminal.innerHTML+=texto[linea].charAt(caracter);
-caracter++;
+i++;
 
-setTimeout(escribir,35);
-
-}else{
-
-terminal.innerHTML+="\n";
-linea++;
-caracter=0;
-
-setTimeout(escribir,300);
-
-}
+setTimeout(escribir,400);
 
 }else{
 
-document.getElementById("boton").style.display="inline-block";
+document.getElementById("terminal").innerHTML+=`
+<br>
+<button id="btn" onclick="mostrar()">❤️ Abrir informe confidencial</button>
+
+<div id="mensaje">
+
+<h2>Josefina Aquino ❤️</h2>
+
+<p>
+
+Después de ejecutar miles de algoritmos y analizar millones de posibilidades...
+
+el resultado siempre fue el mismo.
+
+<br><br>
+
+<b>Eres una gran persona.</b>
+
+<br><br>
+
+No solo admiro la excelente informática que eres.
+
+Admiro aún más tu forma de ser, tu inteligencia, tu dedicación y la calidad humana que tienes.
+
+<br><br>
+
+Gracias por llegar a mi vida.
+
+Conocerte ha sido uno de esos regalos inesperados que hacen los días mucho más especiales.
+
+<br><br>
+
+Espero que nunca cambies esa esencia tan bonita que te caracteriza.
+
+<br><br>
+
+<b>Gracias por existir. ❤️</b>
+
+<br><br>
+
+— Saul
+
+</p>
+
+</div>
+`;
+
+document.getElementById("btn").style.display="inline-block";
 
 }
 
@@ -186,25 +164,30 @@ document.getElementById("boton").style.display="inline-block";
 
 escribir();
 
-function mostrarMensaje(){
+function mostrar(){
 
 document.getElementById("mensaje").style.display="block";
 
-for(let i=0;i<150;i++){
+for(let i=0;i<80;i++){
 
 let c=document.createElement("div");
 
-c.className="confeti";
-
+c.style.position="fixed";
 c.style.left=Math.random()*100+"vw";
-
-c.style.background="hsl("+Math.random()*360+",100%,50%)";
-
-c.style.animationDuration=(Math.random()*3+2)+"s";
-
+c.style.top="-10px";
+c.style.width="8px";
+c.style.height="8px";
+c.style.background=`hsl(${Math.random()*360},100%,50%)`;
+c.style.borderRadius="50%";
+c.style.transition="4s";
 document.body.appendChild(c);
 
-setTimeout(()=>c.remove(),5000);
+setTimeout(()=>{
+c.style.transform=`translateY(${window.innerHeight+100}px)`;
+c.style.opacity=0;
+},10);
+
+setTimeout(()=>c.remove(),4000);
 
 }
 

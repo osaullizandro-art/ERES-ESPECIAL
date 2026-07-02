@@ -1,3 +1,133 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Acceso Restringido</title>
+
+<style>
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+}
+
+body{
+    background:#000;
+    color:#00ff88;
+    font-family:Consolas, monospace;
+    overflow:hidden;
+}
+
+#terminal{
+    padding:25px;
+    font-size:18px;
+    white-space:pre-wrap;
+}
+
+.cursor{
+    display:inline-block;
+    width:10px;
+    background:#00ff88;
+    animation:blink .8s infinite;
+}
+
+@keyframes blink{
+50%{opacity:0;}
+}
+
+#boton{
+    display:none;
+    margin-top:30px;
+    padding:15px 30px;
+    font-size:18px;
+    background:#00ff88;
+    color:#000;
+    border:none;
+    border-radius:10px;
+    cursor:pointer;
+    font-weight:bold;
+    transition:.3s;
+}
+
+#boton:hover{
+transform:scale(1.05);
+}
+
+#mensaje{
+display:none;
+margin-top:30px;
+padding:20px;
+background:#111;
+border:2px solid #00ff88;
+border-radius:15px;
+font-size:20px;
+line-height:1.7;
+color:white;
+animation:fade 1s;
+}
+
+@keyframes fade{
+from{opacity:0;transform:translateY(20px);}
+to{opacity:1;transform:translateY(0);}
+}
+
+.confeti{
+position:fixed;
+width:10px;
+height:10px;
+top:-10px;
+animation:caer linear forwards;
+}
+
+@keyframes caer{
+to{
+transform:translateY(110vh) rotate(720deg);
+opacity:0;
+}
+}
+</style>
+
+</head>
+
+<body>
+
+<div id="terminal"></div>
+
+<button id="boton" onclick="mostrarMensaje()">
+Ejecutar archivo secreto ❤️
+</button>
+
+<div id="mensaje">
+<h2>❤️ Compilación completada</h2><br>
+
+No encontré ningún error.<br><br>
+
+Resultado del análisis:<br><br>
+
+✔ Inteligente<br>
+✔ Admirable<br>
+✔ Talentosa<br>
+✔ Increíble persona<br><br>
+
+Después de ejecutar miles de líneas de código...
+
+<strong>solo encontré una conclusión:</strong><br><br>
+
+🌹 <b>Eres una de las personas más especiales que he conocido.</b><br><br>
+
+Tu forma de pensar, tu dedicación y la pasión con la que haces lo que te gusta hacen que seas única.
+
+Gracias por existir. ❤️
+
+<br><br>
+
+<small>return "Te admiro muchísimo";</small>
+
+</div>
+
+<script>
+
 const texto=[
 "> Iniciando sistema...",
 "> Conectando...",
@@ -19,3 +149,68 @@ const texto=[
 "",
 "> Archivo secreto listo..."
 ];
+
+let linea=0;
+let caracter=0;
+
+const terminal=document.getElementById("terminal");
+
+function escribir(){
+
+if(linea<texto.length){
+
+if(caracter<texto[linea].length){
+
+terminal.innerHTML+=texto[linea].charAt(caracter);
+caracter++;
+
+setTimeout(escribir,35);
+
+}else{
+
+terminal.innerHTML+="\n";
+linea++;
+caracter=0;
+
+setTimeout(escribir,300);
+
+}
+
+}else{
+
+document.getElementById("boton").style.display="inline-block";
+
+}
+
+}
+
+escribir();
+
+function mostrarMensaje(){
+
+document.getElementById("mensaje").style.display="block";
+
+for(let i=0;i<150;i++){
+
+let c=document.createElement("div");
+
+c.className="confeti";
+
+c.style.left=Math.random()*100+"vw";
+
+c.style.background="hsl("+Math.random()*360+",100%,50%)";
+
+c.style.animationDuration=(Math.random()*3+2)+"s";
+
+document.body.appendChild(c);
+
+setTimeout(()=>c.remove(),5000);
+
+}
+
+}
+
+</script>
+
+</body>
+</html>
